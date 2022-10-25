@@ -81,3 +81,47 @@
       -최신 포스트 보여주기 
 
   6. 상세 페이지 만들기 
+      - 포스트 상세 패이지 URL 정의 하기 (blog/url.py)
+      - blog/views.py에서 함수 설정 
+      - 상세 페이지 템플릿 만들기 
+      - blog/model.py 에서 상세페이지 링크로 가는 모델 설정 
+     
+- single_pages 앱 만들기 
+  
+  1. single_pasge 앱 url 정의 (프로젝트 파일/urls.py) (대문페이지?)
+  
+  2. 대문 페이지, 자기소개 페이지 URL 정의하기  
+     -도메인 뒤에 뭐가 있는지에 따라 views.py 파일에 어떤 함수를 실행 시킬지?
+     
+  3. single_pages/views.py에 함수 정의 하기 
+  
+  4. 템플릿 파일 만들기  
+  
+~~~~~~~~~~~~~~~~~~~~~~~~  
+
+### 4.정적파일 처리하기 
+
+~~~~~~~~~~~~~
+- FBV -> CBV 변환 
+
+  1. blog/views.py 수정
+     함수에서 클래스 모델로 변경
+     
+  2. blog/urls.py 수정 
+     기존에 views.py에서 정의 했던 함수를 
+     클래스 모델로 변경 
+  
+  3. 모델에 맞게 템플릿 지정
+     -직접 지정 : blog/views.py PostList 클래스 모델에서 
+       template_name을 직접 지정 
+      
+     - 관례 : 파일명을 post_list.html로 수정 
+    
+  4. 상세페이지도 위가 같은 방법..
+     - post_list.html 에서 기존에 posts 라고 쓰여 있는 부분을 
+       post_list로 수정! (Post 모델을 사용해서 바꿔준거임!) 
+
+- 정적파일 처리하기 
+  
+  1. 각 앱 폴더 안에 static 폴더 만들고 css파일 넣기
+       각 앱 폴더(blog, single_pages) 
