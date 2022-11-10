@@ -125,3 +125,24 @@
   
   1. 각 앱 폴더 안에 static 폴더 만들고 css파일 넣기
        각 앱 폴더(blog, single_pages) 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### 장고 쉘 플러스 사용하기 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  파이썬 콘솔? 터미널? 환경에서 장고 홈페이지 정보? 확인가능 
+  
+  터미널에 입력 
+  - pip install django_extensions ipython
+  - python manege.py shell_plus 입력 
+
+  Post.objects.count() = 개수 출력 
+  Post.objects.all() = 목록 모두 출력 
+
+  for 문 사용하여 포스트 글 목록 확인 가능 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+
