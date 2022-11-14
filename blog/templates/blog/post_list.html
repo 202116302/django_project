@@ -42,10 +42,17 @@
                             <p class="fs-5 mb-4">테스트 블로그 입니다.</p>
                             <h2 class="fw-bolder mb-4 mt-5">posts</h2>
                             {% for p in post_list %}
-                            <hr/>
+<!--                            blog Post-->
+                            <div class="'card mb-4">
+                                {% if p.head_image %}
+                                <img class="card-img-top" src="{{ p.head_image.url }}" alt="{{ p }} head im-age">
+                                {% else %}
+                                <img class="card-img-top" src="http://picsum.photos/seed/{{ p.id }}/800/200" alt="random_image">
+                                {% endif %}
                             <h2><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h2>
                             <h4>{{ p.created_at }}</h4>
                             <p>{{ p.content }}</p>
+                            </div>
                             {% endfor %}
                         </section>
                     </article>
