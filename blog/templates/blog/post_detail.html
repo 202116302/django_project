@@ -9,9 +9,14 @@
 <nav>
   <a href="/blog/">Blog</a>
 </nav>
-{%
-<img class="img-fluid rounded" src="{{ post.head_image.url}}" alt=" ">
+{% if post.head_image %}
+    <img class="img-fluid rounded" src="{{ post.head_image.url}}" alt="{{ post.title }} head_image">
+{% else %}
+    <img class="img-fluid rounded" src="http://picsum.photos/seed/{{ post.id }}/800/200" alt="random_image">
+{% endif %}
+
 <h1>{{ post.title }}</h1>
+<h5 class="text-muted">{{ post.hook_text }}</h5>
 <h4>{{ post.created_at }}</h4>
 <p>{{ post.content }}</p>
 
