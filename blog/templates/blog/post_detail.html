@@ -1,41 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ post.title }} - Blog</title>
-    <script src="https://kit.fontawesome.com/1fb217f3df.js" crossorigin="anonymous"></script>
-</head>
-<body>
-<nav>
-  <a href="/blog/">Blog</a>
-</nav>
-{% if post.head_image %}
-    <img class="img-fluid rounded" src="{{ post.head_image.url}}" alt="{{ post.title }} head_image">
-{% else %}
-    <img class="img-fluid rounded" src="http://picsum.photos/seed/{{ post.id }}/800/200" alt="random_image">
-{% endif %}
+{% extends 'blog/base.html' %}
 
-<h1>{{ post.title }}</h1>
-<h5 class="text-muted">{{ post.hook_text }}</h5>
-<h4>{{ post.created_at }}</h4>
-<p>{{ post.content }}</p>
+{% block main_area %}
+<!-- Preview image figure-->
+<div class="card mb-4">
+    {% if post.head_image %}
+    <img class="img-fluid rounded" src="{{ post.head_image.url}}"
+         alt="{{ post.title }} head_image">
+    {% else %}
+    <img class="img-fluid rounded" src="http://picsum.photos/seed/{{ post.id }}/800/200"
+         alt="random_image">
+    {% endif %}
+    <div class="card-body">
+        <h2 class="card-title">{{ post.title }}</h2>
+        <h5 class="text-muted">{{ post.hook_text }}</h5>
+        <p class="card-text">{{ post.content }}</p>
+        {% if post.file_upload %}
+        <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button">
+            Download:
 
-{% if post.file_upload %}
-    <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button">
-        Download:
-
-        {% if post.get_file_ext == 'csv' %}
+            {% if post.get_file_ext == 'csv' %}
             <i class="fas fa-file-csv"></i>
-        {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+            {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
             <i class="fas fa-file-excel"></i>
-        {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+            {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
             <i class="fas fa-file-word"></i>
-        {% else %}
+            {% else %}
             <i class="far fa-file"></i>
+            {% endif %}
+            {{ post.get_file_name }}
+        </a>
         {% endif %}
-        {{ post.get_file_name }}
-    </a>
-{% endif %}
-<hr/>
-</body>
-</html>
+    </div>
+    <div class="card-footer text-muted">{{ post.created_at }}</div>
+</div>
+<!-- Comments section-->
+<section class="mb-5">
+    <div class="card bg-light">
+        <div class="card-body">
+            <!-- Comment form-->
+            <form class="mb-4"><textarea class="form-control" rows="3"
+                                         placeholder="Join the discussion and leave a comment!"></textarea>
+            </form>
+            <!-- Comment with nested comments-->
+            <div class="d-flex mb-4">
+                <!-- Parent comment-->
+                <div class="flex-shrink-0"><img class="rounded-circle"
+                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                alt="..."/></div>
+                <div class="ms-3">
+                    <div class="fw-bold">Commenter Name</div>
+                    If you're going to lead a space frontier, it has to be government; it'll never be
+                    private enterprise. Because the space frontier is dangerous, and it's expensive, and
+                    it has unquantified risks.
+                    <!-- Child comment 1-->
+                    <div class="d-flex mt-4">
+                        <div class="flex-shrink-0"><img class="rounded-circle"
+                                                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                        alt="..."/></div>
+                        <div class="ms-3">
+                            <div class="fw-bold">Commenter Name</div>
+                            And under those conditions, you cannot establish a capital-market evaluation
+                            of that enterprise. You can't get investors.
+                        </div>
+                    </div>
+                    <!-- Child comment 2-->
+                    <div class="d-flex mt-4">
+                        <div class="flex-shrink-0"><img class="rounded-circle"
+                                                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                        alt="..."/></div>
+                        <div class="ms-3">
+                            <div class="fw-bold">Commenter Name</div>
+                            When you put money directly to a problem, it makes a good headline.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Single comment-->
+            <div class="d-flex">
+                <div class="flex-shrink-0"><img class="rounded-circle"
+                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                alt="..."/></div>
+                <div class="ms-3">
+                    <div class="fw-bold">Commenter Name</div>
+                    When I look at the universe and all the ways the universe wants to kill us, I find
+                    it hard to reconcile that with statements of beneficence.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
